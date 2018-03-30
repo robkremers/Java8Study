@@ -28,18 +28,32 @@ git push -u origin master
 
 - Java 8 In Action:
 	- Java 8: Support for multi-core parallel processing.
+	- A Stream is a sequence of data items that are conceptually produced one at a time.
+		Java 8 can transparently run your pipeline of Stream operations on several CPU cores on disjoint parts of the input.
+		The data source supports aggregate operations.
+		The output stream of one operation could well be the input stream f another.
 	- Behaviour Parameterization:
-		The ability to tell a method to take multiple behaviors (or strategies) as parameters and use them internally to accomplish different behaviors.
+		The ability to tell a method to take multiple behaviours (or strategies) as parameters and use them internally to accomplish different behaviours.
 		- In detail:
 			Suppose you want to write two methods that differ in only a few lines of code.
 			You can now just pass the code of the parts that differ as an argument.
-	- A Stream is a sequence of data items that are conceptually produced one at a time.
-		The data source supports aggregate operations.
-		The output stream of one operation could well be the input stream f another.
+	- Parallelism and shared mutable data.
+		- The code for the behaviour that is passed to the stream should be safe to execute concurrently on different pieces of the input.
+		  Typically this means writing code that does not access shared mutable data.
+	- Predicate:
+		- A method that takes a value for an argument and returns a boolean.
+		- java.util.function.Predicate<T>
+			T - the type of the input to the predicate
+			Represents a predicate (boolean-valued function) of one argument.
+			This is a functional interface whose functional method is test(Object).
+			Functional interfaces provide target types for lambda expressions and method references.
+		- java.util.function.Function<T, R>
+			T - the type of the input to the function
+			R - the type of the result of the function
 	- Lambda expression:
 		- Definition:
-			A Lambda Expression ( or just a lambda for brevity) is a representation of an anonymous function which can be passed around as a parameter thus achieving behavior parameterization. A lambda consists of a list of parameters, a body, a return type and a list of exceptions which can be thrown. I.e. it is very much a function, just anonymous.
-		- A concise representation of an anonymous clas that can be passed around.
+			A Lambda Expression ( or just a lambda for brevity) is a representation of an anonymous function which can be passed around as a parameter thus achieving behaviour parameterization. A lambda consists of a list of parameters, a body, a return type and a list of exceptions which can be thrown. I.e. it is very much a function, just anonymous.
+		- A concise representation of an anonymous class that can be passed around.
 			- Anonymous
 			- Function:
 				- a Lambda expression is not associated with a particular class
@@ -54,7 +68,15 @@ git push -u origin master
 				(provided the parameter list is compatible too).
 				
 		- A Lamda expression is handled via a functional interface.
-			
+	- Default Methods:
+		- Added to Java 8 to support library designers by enabling them to write more evolvable interfaces.
+		  Using it solves the problem of having to update all classes that already have implemented the interface.
+		- Examples:
+			Interface java.util.Collection<E>:
+				default Stream<E> stream().
+			- Now for Collections the Stream functionality (java.util.stream) can be used.
+			- But since the methods has been defined as 'default' existing libraries / custom code does not need to implement this.
+
 @FunctionalInterface
 An informative annotation type used to indicate that an interface type declaration is intended to be a functional interface as defined by the Java Language Specification. 
 
@@ -65,7 +87,7 @@ An informative annotation type used to indicate that an interface type declarati
 					public interface Predicate<T>() {
 						boolean test(T t);
 					}
-		- An anynomous class can achieve the same result though usually is more verbose.
+		- An anonymous class can achieve the same result though usually is more verbose.
 		- The signature of the abstract method of a functional interface is called a functional descriptor.
 
 http://www.java2s.com/Tutorials/Java/java.util.function/Consumer/index.htm

@@ -234,3 +234,49 @@ java.net.UnknownHostException: dist.springsource.com
 	at org.eclipse.ecf.provider.filetransfer.httpclient4.HttpClientRetrieveFileTransfer$1.performFileTransfer(HttpClientRetrieveFileTransfer.java:1071)
 	at org.eclipse.ecf.filetransfer.FileTransferJob.run(FileTransferJob.java:74)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)
+
+!ENTRY org.eclipse.core.resources 4 77 2018-03-30 12:01:16.645
+!MESSAGE Invalid project description.
+!SUBENTRY 1 unknown 0 0 2018-03-30 12:01:16.645
+!MESSAGE OK
+!SUBENTRY 1 org.eclipse.core.resources 4 77 2018-03-30 12:01:16.645
+!MESSAGE E:\JavaDevelopment\Java8InActionWorkspace overlaps the workspace location: E:\JavaDevelopment\Java8InActionWorkspace
+
+!ENTRY org.jkiss.dbeaver.model 2 0 2018-03-30 12:02:15.035
+!MESSAGE Project 'FilteringApples' not found in registry
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-03-30 12:02:18.362
+!MESSAGE Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-03-30 12:02:18.371
+!MESSAGE Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-30 12:03:33.901
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-30 12:03:33.902
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-30 12:07:02.754
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-30 12:07:02.755
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-30 12:13:02.815
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2018-03-30 12:13:02.816
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
+
+!ENTRY org.eclipse.jdt.core 4 964 2018-03-30 18:40:09.910
+!MESSAGE Cannot nest 'FilteringApples/src/main/resources' inside 'FilteringApples/src'. To enable the nesting exclude 'main/' from 'FilteringApples/src'
+
+!ENTRY org.eclipse.jdt.core 4 964 2018-03-30 18:41:04.155
+!MESSAGE Cannot nest 'FilteringApples/src/main/resources' inside 'FilteringApples/src'. To enable the nesting exclude 'main/' from 'FilteringApples/src'
+
+!ENTRY org.eclipse.jdt.core 4 964 2018-03-30 18:43:23.933
+!MESSAGE Cannot nest 'FilteringApples/src/main/resources' inside 'FilteringApples/src'. To enable the nesting exclude 'main/' from 'FilteringApples/src'
+
+!ENTRY org.eclipse.jdt.core 4 964 2018-03-30 18:45:11.594
+!MESSAGE Cannot nest 'FilteringApples/src/test/java' inside 'FilteringApples/src'. To enable the nesting exclude 'test/' from 'FilteringApples/src'
