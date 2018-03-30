@@ -1,0 +1,119 @@
+Topic	: Study of Java8.
+Date	: 2017-05-08.
+
+- Documentation:
+	- Java 8 In Action.
+	- https://github.com/java8/Java8InAction
+	- http://docs.oracle.com/javase/tutorial/java/index.html
+		- https://docs.oracle.com/javase/tutorial/collections/index.html
+			- Aggregate operations: streams.
+	- https://www.tutorialspoint.com/java8/index.htm
+	- http://www.baeldung.com/java-8-streams
+	
+---------------------------------------------------------------------------------------------------
+2018-03-31:
+
+LTAdmin@LTAdmin-PC MINGW64 /e/JavaDevelopment/Java8InActionWorkspace
+$
+
+git init
+git pull https://github.com/robkremers/Java8Study.git
+git status
+git add .
+git commit -m "Initial commit."
+git remote add origin https://github.com/robkremers/Java8Study.git
+git push -u origin master
+
+
+
+- Java 8 In Action:
+	- Java 8: Support for multi-core parallel processing.
+	- Behaviour Parameterization:
+		The ability to tell a method to take multiple behaviors (or strategies) as parameters and use them internally to accomplish different behaviors.
+		- In detail:
+			Suppose you want to write two methods that differ in only a few lines of code.
+			You can now just pass the code of the parts that differ as an argument.
+	- A Stream is a sequence of data items that are conceptually produced one at a time.
+		The data source supports aggregate operations.
+		The output stream of one operation could well be the input stream f another.
+	- Lambda expression:
+		- Definition:
+			A Lambda Expression ( or just a lambda for brevity) is a representation of an anonymous function which can be passed around as a parameter thus achieving behavior parameterization. A lambda consists of a list of parameters, a body, a return type and a list of exceptions which can be thrown. I.e. it is very much a function, just anonymous.
+		- A concise representation of an anonymous clas that can be passed around.
+			- Anonymous
+			- Function:
+				- a Lambda expression is not associated with a particular class
+				- like a method a Lambda expression has a list of parameters, a body, a return type and possibly a list of exceptions.
+			- Can be passed as an argument to a method or stored in a variable.
+			- Concise: the main advantage is, that it saves (potentially) a lot of code writing.
+		- Basic syntax:
+			(parameters) -> expression
+			or
+			(parameters) -> {statements; }
+			- If a lambda has a statement expression as it's body, it's compatible with a function descriptor that returns void
+				(provided the parameter list is compatible too).
+				
+		- A Lamda expression is handled via a functional interface.
+			
+@FunctionalInterface
+An informative annotation type used to indicate that an interface type declaration is intended to be a functional interface as defined by the Java Language Specification. 
+
+		- Lambda expressions can be used in the context of a functional interface.
+			- A functional interface is an interface that specifies exactly one abstract method.
+				- A functional interface can have default methods (so non-abstract).
+				- Example:
+					public interface Predicate<T>() {
+						boolean test(T t);
+					}
+		- An anynomous class can achieve the same result though usually is more verbose.
+		- The signature of the abstract method of a functional interface is called a functional descriptor.
+
+http://www.java2s.com/Tutorials/Java/java.util.function/Consumer/index.htm
+http://www.concretepage.com/java/jdk-8/java-8-runnable-and-callable-lambda-example-with-argument		
+http://www.javabrahman.com/java-8/functional-interfaces-java-8/
+
+		- Type Inference.
+			The Java Compiler can deduce what functional interface to associate with a lambda expression from its surrounding context (the target type).
+		- Since lambdas are actually anonymous classes they can use instance variables and static variables without restrictions.
+			Local variables do have to be declared final or are effectively final.
+			If the value of the local variable is changed later this will cause a compile error. Prevent this by declaring it 'final'.
+			An instance or static variable can be changed afterwards.
+			Reason for this:
+			- Instance variables are stored on the heap, whereas local variables live on the stack.
+			  If a lambda could access the local variable directly and the lambda were used in a thread, the thread using the lambda could try to access the variable after the thread that allocated the variable had de-allocated it.
+			  Hence, Java implements access to a free local variable as access to a copy of it rather than access to the original variable.
+			  
+	- Closure and lambdas:
+		- Definition:
+			An instance of a function that can reference non-local variables of that function without restrictions.
+			e.g. a closure can be passed as argument to another function. It could also access and modify variables defined outside its scope.
+			Lamdas can do something similar.
+			However they CAN NOT modify the content of local variables of a method in which the lambda is defined.
+			Those local variables have to be implicitly final
+			Again: this restriction exists because the local variables live on the stack and are confined to the thread they are in.
+			
+	- Method Reference:
+		- Definition:
+			Shorthand for a Lambda calling only a specific method.
+		- Declaration:
+			<target reference> :: <name of the method to be used>
+			No brackets are necessary because the method is not actually called.
+		- Example:
+			(String s) -> System.out.println(s); == System.out::println;
+		- Three main kinds of method references.
+			- A method reference to a static method
+				- Definition: (args) -> ClassName.staticMethod(args); == ClassName::staticMethod
+				- Example   : (Integer i) -> i.parsInt(); == Integer::parseInt
+			- A method reference to an instance method of an arbitrary type.
+				- Definition: (arg0, rest) -> arg0.instanceMethod(rest) == arg0::instanceMethod;
+				- Example   : (String s) -> s.lenghth() == String::length
+			- A method reference to an instance method of an existing object.
+				- Definition: (args) -> expr.instanceMethod(args) == expr::instanceMethod;
+				- Example: 
+					ExpensiveTransaction expensiveTransaction = new ExpensiveTransaction();
+					....
+					expensiveTransaction::getValue;
+
+	- Constructor Reference:
+		
+			
