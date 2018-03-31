@@ -1,0 +1,9 @@
+com\java8study\chapter01\predicates\AppleColorPredicate.class
+com\java8study\chapter01\entities\Apple.class
+com\java8study\chapter01\formatters\AppleFancyFormatter.class
+com\java8study\chapter01\formatters\AppleSimpleFormatter.class
+com\java8study\chapter01\predicates\AppleRedHeavyPredicate.class
+com\java8study\chapter01\predicates\AppleWeightPredicate.class
+com\java8study\chapter01\FilteringApples.class
+com\java8study\chapter01\interfaces\AppleFormatter.class
+com\java8study\chapter01\FilteringApples$1.class

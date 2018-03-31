@@ -33,10 +33,44 @@ git push -u origin master
 		The data source supports aggregate operations.
 		The output stream of one operation could well be the input stream f another.
 	- Behaviour Parameterization:
-		The ability to tell a method to take multiple behaviours (or strategies) as parameters and use them internally to accomplish different behaviours.
+		- Definition:
+			The ability to tell a method to take multiple behaviours (or strategies) as parameters and use them internally to accomplish different behaviours.
+			This allows to create more adaptive code with regards to changing requirements and make the code more concise.
 		- In detail:
 			Suppose you want to write two methods that differ in only a few lines of code.
 			You can now just pass the code of the parts that differ as an argument.
+		- Example:
+			- In the following the strategy (predicate) has been separated from the logic of iterating the collection (inside the filter).
+			- Predicates examples:
+			
+				public boolean isHeavyApple(Apple apple) {
+					return (apple.getWeight() > this.getBoundary() );
+				}
+				
+				public class AppleWeightPredicate implements Predicate<Apple> {
+					
+					@Override
+					public boolean test(Apple apple) {
+						return apple.getWeight() > 150;
+					}
+				}		
+		
+			- Processing of the predicates:
+			
+				public static List<Apple> filterApplesStream(List<Apple> inventory, Predicate<Apple> predicate ) {
+					List<Apple> result = new ArrayList<>();
+					
+					result = inventory.stream().filter(predicate).collect( toList() );	
+					return result;
+				}
+				
+			- Setting the predicate in the call of the filter, using a lambda:
+			
+				List<Apple> redHeavyApples2 = filterApplesStream( inventory
+																, (Apple apple) -> (apple.getWeight() > 150 && apple.getColor().equals("red") ) 
+																);
+
+	
 	- Parallelism and shared mutable data.
 		- The code for the behaviour that is passed to the stream should be safe to execute concurrently on different pieces of the input.
 		  Typically this means writing code that does not access shared mutable data.
@@ -138,4 +172,9 @@ http://www.javabrahman.com/java-8/functional-interfaces-java-8/
 
 	- Constructor Reference:
 		
-			
+		
+---------------------------------------------------------------------------------------------------
+2018-03-30:
+
+Chapter 2: Passing Code with Behaviour Parameterization.
+Continue tomorrow at pg. 30.
