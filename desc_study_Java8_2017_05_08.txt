@@ -86,12 +86,17 @@ git push -u origin master
 			R - the type of the result of the function
 	- Lambda expression:
 		- Definition:
-			A Lambda Expression ( or just a lambda for brevity) is a representation of an anonymous function which can be passed around as a parameter thus achieving behaviour parameterization. A lambda consists of a list of parameters, a body, a return type and a list of exceptions which can be thrown. I.e. it is very much a function, just anonymous.
+			A Lambda Expression ( or just a lambda for brevity) is a representation of an anonymous function which can be passed around as a parameter thus achieving behaviour parameterization. 
+			A lambda consists of a list of parameters, a body, a return type and a list of exceptions which can be thrown. I.e. it is very much a function, just anonymous.
 		- A concise representation of an anonymous class that can be passed around.
 			- Anonymous
 			- Function:
 				- a Lambda expression is not associated with a particular class
-				- like a method a Lambda expression has a list of parameters, a body, a return type and possibly a list of exceptions.
+				- like a method a Lambda expression has:
+					- a list of parameters
+					- a body
+					- a return type 
+					- and possibly a list of exceptions.
 			- Can be passed as an argument to a method or stored in a variable.
 			- Concise: the main advantage is, that it saves (potentially) a lot of code writing.
 		- Basic syntax:
@@ -101,7 +106,7 @@ git push -u origin master
 			- If a lambda has a statement expression as it's body, it's compatible with a function descriptor that returns void
 				(provided the parameter list is compatible too).
 				
-		- A Lamda expression is handled via a functional interface.
+		- A Lambda expression is handled via a functional interface.
 	- Default Methods:
 		- Added to Java 8 to support library designers by enabling them to write more evolvable interfaces.
 		  Using it solves the problem of having to update all classes that already have implemented the interface.
@@ -111,6 +116,7 @@ git push -u origin master
 			- Now for Collections the Stream functionality (java.util.stream) can be used.
 			- But since the methods has been defined as 'default' existing libraries / custom code does not need to implement this.
 
+java.lang public @interface @FunctionalInterface.
 @FunctionalInterface
 An informative annotation type used to indicate that an interface type declaration is intended to be a functional interface as defined by the Java Language Specification. 
 
@@ -121,6 +127,26 @@ An informative annotation type used to indicate that an interface type declarati
 					public interface Predicate<T>() {
 						boolean test(T t);
 					}
+				- Example:
+					package com.java8study.chapter03.interfaces;
+
+					@FunctionalInterface
+					public interface MyStringInterface {
+						
+						public String testMethod(String string);
+
+					}
+					
+					- Use:
+						MyStringInterface myStringInterface = ( String string ) -> string + " Tested.";  
+						
+						String stringOutput = myStringInterface.testMethod("test");
+						System.out.println(stringOutput);
+						
+					- Result:
+						> test Tested.
+
+					
 		- An anonymous class can achieve the same result though usually is more verbose.
 		- The signature of the abstract method of a functional interface is called a functional descriptor.
 
@@ -178,3 +204,60 @@ http://www.javabrahman.com/java-8/functional-interfaces-java-8/
 
 Chapter 2: Passing Code with Behaviour Parameterization.
 Continue tomorrow at pg. 30.
+
+---------------------------------------------------------------------------------------------------
+2018-04-01:
+
+Chapter 3: Lambdas in a nutshell.
+
+Study:
+- Package java.util.stream
+- java.util.stream.Collectors.toList;
+
+- Example of a self defined Functional interface:
+
+		package com.java8study.chapter03.interfaces;
+
+		@FunctionalInterface
+		public interface PredicateInstanceProperty<T, P> {
+			
+			public boolean accept (T t, P p);
+
+		}
+
+		Use:
+		
+			PredicateInstanceProperty<Apple, Integer> appleWeight = (Apple apple, Integer value) -> (apple.getWeight() > value );
+			
+			boolean heavy = appleWeight.accept( new Apple(180, "green"), 200);
+			System.out.println("Is the apple heavy? " + heavy);
+			
+Standard functional interfaces:
+
+- java.util.function:
+	public interface Predicate<T> {
+		boolean test(T t);
+	}
+	
+- And the other functional interfaces in this package.
+
+- java.util.Comparator:
+	public interface Comparator<T> {
+		int compare( T t1, T t2);
+	}
+	
+- java.util.Runnable
+	public interface Runnable {
+		void run();
+	}
+	
+- java.util.concurrent.Callable
+	public interface Callable<V> {
+		V call();
+	}
+	
+- java.security.PrivilegedAction
+	public interface PriviledgedAction<T> {
+		T run();
+	}
+	

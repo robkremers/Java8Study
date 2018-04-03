@@ -841,3 +841,63 @@ org.eclipse.core.runtime.CoreException: Launch configuration FilteringApples ref
 !MESSAGE OK
 !SUBENTRY 1 org.eclipse.core.resources 4 77 2018-03-31 22:31:43.246
 !MESSAGE E:\JavaDevelopment\Java8InActionWorkspace overlaps the workspace location: E:\JavaDevelopment\Java8InActionWorkspace
+
+!ENTRY org.eclipse.core.resources 4 77 2018-04-01 16:18:52.445
+!MESSAGE Invalid project description.
+!SUBENTRY 1 unknown 0 0 2018-04-01 16:18:52.445
+!MESSAGE OK
+!SUBENTRY 1 org.eclipse.core.resources 4 77 2018-04-01 16:18:52.445
+!MESSAGE E:\JavaDevelopment\Java8InActionWorkspace overlaps the workspace location: E:\JavaDevelopment\Java8InActionWorkspace
+
+!ENTRY org.eclipse.epp.logging.aeri.ide 2 20 2018-04-01 16:19:52.643
+!MESSAGE Sending report to ‘Eclipse’ failed: Read timed out ; version: 2.0.6.v20170906-1226
+!STACK 0
+java.net.SocketTimeoutException: Read timed out
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(SocketInputStream.java:116)
+	at java.net.SocketInputStream.read(SocketInputStream.java:171)
+	at java.net.SocketInputStream.read(SocketInputStream.java:141)
+	at sun.security.ssl.InputRecord.readFully(InputRecord.java:465)
+	at sun.security.ssl.InputRecord.read(InputRecord.java:503)
+	at sun.security.ssl.SSLSocketImpl.readRecord(SSLSocketImpl.java:973)
+	at sun.security.ssl.SSLSocketImpl.readDataRecord(SSLSocketImpl.java:930)
+	at sun.security.ssl.AppInputStream.read(AppInputStream.java:105)
+	at org.apache.http.impl.io.SessionInputBufferImpl.streamRead(SessionInputBufferImpl.java:137)
+	at org.apache.http.impl.io.SessionInputBufferImpl.fillBuffer(SessionInputBufferImpl.java:153)
+	at org.apache.http.impl.io.SessionInputBufferImpl.readLine(SessionInputBufferImpl.java:282)
+	at org.apache.http.impl.conn.DefaultHttpResponseParser.parseHead(DefaultHttpResponseParser.java:140)
+	at org.apache.http.impl.conn.DefaultHttpResponseParser.parseHead(DefaultHttpResponseParser.java:57)
+	at org.apache.http.impl.io.AbstractMessageParser.parse(AbstractMessageParser.java:259)
+	at org.apache.http.impl.DefaultBHttpClientConnection.receiveResponseHeader(DefaultBHttpClientConnection.java:163)
+	at org.apache.http.impl.conn.CPoolProxy.receiveResponseHeader(CPoolProxy.java:167)
+	at org.apache.http.protocol.HttpRequestExecutor.doReceiveResponse(HttpRequestExecutor.java:273)
+	at org.apache.http.protocol.HttpRequestExecutor.execute(HttpRequestExecutor.java:125)
+	at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:271)
+	at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:184)
+	at org.apache.http.impl.execchain.RetryExec.execute(RetryExec.java:88)
+	at org.apache.http.impl.execchain.RedirectExec.execute(RedirectExec.java:110)
+	at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:184)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:82)
+	at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:55)
+	at org.apache.http.client.fluent.Request.internalExecute(Request.java:173)
+	at org.apache.http.client.fluent.Executor.execute(Executor.java:262)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.mars.IO.upload(IO.java:98)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.mars.ServerConnection.submit(ServerConnection.java:282)
+	at org.eclipse.epp.internal.logging.aeri.ide.utils.UploadReportsScheduler.send(UploadReportsScheduler.java:53)
+	at org.eclipse.epp.internal.logging.aeri.ide.utils.UploadReportsScheduler.send(UploadReportsScheduler.java:77)
+	at org.eclipse.epp.internal.logging.aeri.ide.IDEStartup$2.send(IDEStartup.java:109)
+	at org.eclipse.epp.internal.logging.aeri.ide.utils.UploadReportsScheduler$UploadJob.run(UploadReportsScheduler.java:118)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:56)
+
+!ENTRY org.eclipse.core.resources 4 77 2018-04-01 16:21:17.940
+!MESSAGE Invalid project description.
+!SUBENTRY 1 unknown 0 0 2018-04-01 16:21:17.940
+!MESSAGE OK
+!SUBENTRY 1 org.eclipse.core.resources 4 77 2018-04-01 16:21:17.940
+!MESSAGE E:\JavaDevelopment\Java8InActionWorkspace overlaps the workspace location: E:\JavaDevelopment\Java8InActionWorkspace
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-04-01 16:22:31.507
+!MESSAGE Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-04-01 16:22:31.508
+!MESSAGE Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
