@@ -23,7 +23,7 @@ public class FileProcessing {
 	}
 
 
-	public static String processFile2( FileReaderProcessor<String> frp, String fileName) {
+	public static String processFile2( FileReaderProcessor<String,String> frp, String fileName) {
 		
 		String line = "";
 		try {

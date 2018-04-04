@@ -149,6 +149,11 @@ An informative annotation type used to indicate that an interface type declarati
 					
 		- An anonymous class can achieve the same result though usually is more verbose.
 		- The signature of the abstract method of a functional interface is called a functional descriptor.
+		  This signature essentially describes the signature of the lambda expression.
+		- A lambda can be:
+			- assigned to a variable (of the correct functional Interface type) or
+			- passed to a method expecting a functional interface as argument, providing the lambda expression has the same signature as the 
+			  abstract method of the functional interface.
 
 http://www.java2s.com/Tutorials/Java/java.util.function/Consumer/index.htm
 http://www.concretepage.com/java/jdk-8/java-8-runnable-and-callable-lambda-example-with-argument		
@@ -260,4 +265,145 @@ Standard functional interfaces:
 	public interface PriviledgedAction<T> {
 		T run();
 	}
+	
+- Commonly used Functional Interfaces in Java 8.
+
+Functional Interface	Function Descriptor	Description
+
+Predicate<T>			T -> boolean		Represents a predicate (boolean-valued function) of one argument.
+Consumer<T>				T -> void			Represents an operation that accepts a single input argument and returns no result.
+Function<T,R>			T -> R				Represents a function that accepts one argument and produces a result.
+Supplier<T>				() -> T				Represents a supplier of results.
+UnaryOperator<T>		T -> T				Represents an operation on a single operand that produces a result of the same type as it's operand.
+BinaryOperator<T>		(T, T) -> T			Represents an operation upon two operands of the same type, producing a result of the same type as the operands.
+BiPredicate<L, R>		(L, R) -> boolean	Represents a predicate (boolean-valued function) of two arguments. This is the two-arity specialization of Predicate.
+BiConsumer<T, U>		(T, U) -> void		Represents an operation that accepts two input arguments and returns no result. 
+											This is the two-arity specialization of Consumer.
+BiFunction<T, U, R>		(T, U) -> R			Represents a function that accepts two arguments and produces a result. 
+											This is the two-arity specialization of Function.
+
+In each case also primitive specializations exist.
+This means boxing will be prevented, which would come at a performance cost.
+
+Examples of lambdas with functional interfaces:
+
+Use Case					Example of Lambda							Matching functional interface
+Boolean expression			( List<String> list) -> list.isEmpty();		Predicate< List<String> >
+
+Creating objects			() -> new Apple(50, "green")				Supplier<Apple>
+
+Consuming from an object	(Apple a) ->								Consumer<Apple>
+								System.out.println( a.getWeight() );
+								
+Select / extract from an 	(String s) -> s.length();					Function<String, Integer> or
+object																	ToIntFunction<String>
+
+Combine two values			(int a, int b) -> a + b;					IntBinaryOperator			
+
+Compare two objects			(Apple apple1, Apple apple2) ->				Comparator(Apple) or
+							 apple1.getWeight().compareTo(				ToIntBiFunction(Apple, Apple ).
+							 apple2.getWeight())
+
+
+- Exceptions, lambdas and functional interfaces:
+	- None of the predefined functional interfaces (java.util.function) allow for a checked exception to be thrown.
+	- Options:
+		a. define a custom interface that declares the checked exception or
+		b. wrap the lambda with a try/catch block.
+		
+	Example of situation a:
+		package com.java8study.chapter03.interfaces;
+
+		import java.io.IOException;
+
+		@FunctionalInterface
+		public interface FileReaderProcessor<T, R> {
+			
+			public R process(T t) throws IOException;
+		}
+
+	Example of situation b:
+
+		Function <BufferedReader, String> f = 
+			(BufferedReader br) -> {
+				try {
+					return br.readLine();
+				} catch( IOException ioe ) {
+					throw new RuntimeException( ioe);
+				}
+			};
+
+
+- Deconstruction of the type-checking process of a lambda-expression by the jvm.
+	- Example:
+		- filter(inventory, (Apple a) -> a.getWeight() > 150 );
+		1. What is the context in which the lambda is used? -> type checking.
+		- Filter definition:
+			- filter( List<Apple> inventory, Predicate<Apple> p);
+		2. So the target type is Predicate<Apple>.
+		3. What is the abstract method in the Predicate<Apple> functional interface?
+			- boolean test(Apple apple);
+		4. So: the method test() describes a function descriptor that accepts an Apple and returns a boolean: Apple -> boolean.
+		5. The function descriptor Apple -> boolean matches the signature of the lambda.
+			So the code type checks.
+			
+	- Because of the idea of target typing, the same lambda expression can be associated with different functional interfaces
+	  if they have a compatible abstract method signature.
+			
+- Type inference:
+	- The Java Compiler deduces what functional interface to associate with a lambda expression from it's surrounding context (the target type).
+	  Meaning it can also deduce an appropriate signature for the lambda, because the function descriptor is available through the target type.
+	- This means that the parameter types of a lambda expression can be omitted.
+	- Sometimes it is more readable to include the type explicitly and sometimes it is more readable to omit them.
+	- Example:
+		Function<Apple, Boolean> testAppleWeight = (Apple apple) -> (apple.getWeight() > 150);
+		
+		can also be written as:
+		
+		Function<Apple, Boolean> testAppleWeight = (apple) -> (apple.getWeight() > 150);
+		
+- Using local variables:
+	- Lambdas are allowed to capture (i.e. to reference) instance variables and static variables without restrictions.
+	- Local variables however have to be explicitly declared final or are effectively final.
+	- Reason: 
+		Instance variables live on the heap, whereas local variables live on the stack.
+		If a lambda could access the local variable directly and the lambda were used in a thread, the thread using the lambda could try to access the local 
+		variable after the thread that allocated the local variable had de-allocated it.
+		Hence, Java implements access to a free local variable as access to a copy of it rather than access to the original variable.
+		This makes no difference if the local variable is assigned to only once.
+	
+- Method reference.
+	- 
+	- http://javarevisited.blogspot.nl/2017/08/how-to-convert-lambda-expression-to-method-reference-in-java8-example.html
+		If you modify the argument before passing it to another method then you cannot replace lambdas with method reference e.g. in the following case we cannot do that:
+
+		listOfNumbers.stream().sorted().forEach(number -> {
+		  System.out.println(String.valueOf(number));
+		  }
+		);
+		
+- Useful methods to compose lambda expressions.
+	- It is possible to use lambda expressions inside another lambda expression in order to build a larger expression.
+	- When using a method inside a lambda expression other methods can be called and / or chained.
+		- Example:
+			inventory.sort( comparing( Apple::getWeight ).reversed().thenComparing( Apple::getColor ) );
+			- See the use of:
+				- reversed()
+				- thenComparing() for comparing, using a different property.
+		- Example:
+			Function<Integer, Integer> f = (x) -> ++x;
+			Function<Integer, Integer> g = (x) -> x * 2;
+			Function<Integer, Integer> h = f.andThen(g);
+			System.out.println("Result after executing h(1): f.andThen(g); first f, then g: " + h.apply(1));
+			
+			Function<Integer, Integer> h2 = f.compose(g);
+			System.out.println("Result after executing h2(1): f.compose(g); first g, then f: " + h2.apply(1));
+
+---------------------------------------------------------------------------------------------------
+Chapter 4 Introducing Streams.
+
+
+				
+
+
 	

@@ -2,7 +2,9 @@ package com.java8study.chapter03.functionality;
 
 import static java.util.stream.Collectors.toList;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,12 +17,12 @@ import com.java8study.chapter03.entities.Apple;
  * @author LTAdmin
  *
  */
-public class Lambdas {
+public class LambdaProcessing {
 	
-	private final static Logger logger = Logger.getLogger(Lambdas.class.getName());
+	private final static Logger logger = Logger.getLogger(LambdaProcessing.class.getName());
 
 
-	public Lambdas() {
+	public LambdaProcessing() {
 	}
 	
 	/**
@@ -54,4 +56,14 @@ public class Lambdas {
 			System.out.println("A " + apple.getColor() + " Apple of " + apple.getWeight() + " grams.");
 		});
 	}
+	
+	
+	public static <T, R> List<R> map( List<T> list, Function<T, R> function) {
+		List<R> result = new ArrayList<>();
+		for (T t: list) {
+			result.add( function.apply(t));
+		}
+		return result;
+	}
+	
 }

@@ -3,7 +3,7 @@ package com.java8study.chapter03.interfaces;
 import java.io.IOException;
 
 @FunctionalInterface
-public interface FileReaderProcessor<T> {
+public interface FileReaderProcessor<T, R> {
 	
-	public String process(T t) throws IOException;
+	public R process(T t) throws IOException;
 }
