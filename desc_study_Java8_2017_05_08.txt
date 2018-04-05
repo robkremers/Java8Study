@@ -402,8 +402,69 @@ Compare two objects			(Apple apple1, Apple apple2) ->				Comparator(Apple) or
 ---------------------------------------------------------------------------------------------------
 Chapter 4 Introducing Streams.
 
+- java.util.stream:
+	- Streams allow manipulation of collections in a declarative way; like an sql query.
+		- Declarative: it is described what should be done, not how it is to be done.
+	- Streams can be processed in parallel transparently, without having to explicitly write multi-threaded code.
 
+To perform a computation, stream operations are composed into a stream pipeline. 
+- A stream pipeline consists of:
+	- a data source:
+		- might be an array, a collection, a generator function, an I/O channel, etc.
+		- Generating a stream from a source preserves the ordering.
+	- zero or more INTERMEDIATE operations which transform a stream into another stream, 
+		- such as:														Function descriptor
+			- Stream<T>		filter(Predicate<? super T> predicate)		T -> boolean
+			- <R> Stream<R>	map(Function<? super T,? extends R> mapper)	T -> R
+			- Stream<T>		distinct()									
+			- Stream<T>		limit(long maxSize)
+			- Stream<T>		sorted(Comparator<? super T> comparator)	(T, T) -> int
+			- etc.
+	- and a TERMINAL operation which produces a result or side-effect, but in any case a non-stream value (including possibly void) 
+		- such as:
+			- long		count()
+							Returns the number of elements in a stream.
+			- void		forEach(Consumer<? super T> action)
+							Consumes each element of a stream and applies a lambda to each of them.
+			- <R,A> R	collect(Collector<? super T,A,R> collector)
+							Reduces the stream to create a collection such as a List, a Map or even an Integer.
+		- No result is produced, and indeed no element is even selected, UNTIL the terminal operation is invoked.
+		
+		- Example:
+			List<String> names = menu.stream()
+									 .filter( d -> d.getCalories() > 300 )
+									 .map( Dish::getName )
+									 .limit( 3 )
+									 .collect( toList() );
+									 
+		- Example:
+			public static List<String> getLowCaloricDishesNamesInJava8(List<Dish> dishes, int caloricValue) {
 				
+				List<String> lowCaloricDishNames = new ArrayList<>();
+				lowCaloricDishNames = dishes.parallelStream()
+										   .filter( ( Dish dish ) -> dish.getCalories() < caloricValue )
+										   .sorted( comparing( Dish::getCalories ))
+										   .map( Dish::getName )
+										   .collect( toList() );
+				
+				return lowCaloricDishNames;
+
+			}
+						 
+- Streams are lazy; computation on the source data is only performed when the terminal operation is initiated, and source elements are consumed only as needed.	
+	- Intermediate operations are lazy:
+		This is because intermediate operations can usually be merged and processed into a single pass by the terminal operation.
+- Characteristics of a stream:
+	- Pipelining:
+		Many stream operations return a stream themselves, allowing operations to be chained and form a larger pipeline.
+		This enables optimization, such as laziness and short-circuiting.
+		A pipeline can be viewed as a database-like query on the data source.
+	- Internal iteration:
+		In contrast to collections, which are iterated explicitly, stream operations do the iteration behind the scene for you.
+		A stream uses internal iteration, it does the iteration for you and takes care of storing the resulting stream somewhere.
+		The developer merely provides a function saying what's to be done.
+- A stream can be traversed only once. After that the stream is said to be consumed.
+	If it is tried to traverse the stream again an IllegalStateException will be thrown.
 
 
 	
