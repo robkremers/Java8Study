@@ -466,5 +466,10 @@ To perform a computation, stream operations are composed into a stream pipeline.
 - A stream can be traversed only once. After that the stream is said to be consumed.
 	If it is tried to traverse the stream again an IllegalStateException will be thrown.
 
+---------------------------------------------------------------------------------------------------
+2018-04-05:
+
+Chapter 5: Working with streams.
+
 
 	

@@ -1,0 +1,10 @@
+com\java8study\chapter05\entities\Dish.class
+com\java8study\chapter05\entities\Dish$Type.class
+com\java8study\chapter05\functionality\Filtering.class
+com\java8study\chapter05\functionality\Mapping.class
+com\java8study\chapter05\entities\Transaction.class
+com\java8study\chapter05\functionality\Reducing.class
+com\java8study\chapter05\Main.class
+com\java8study\chapter05\functionality\Finding.class
+com\java8study\chapter05\entities\Trader.class
+com\java8study\chapter05\PuttingIntoPractice.class
