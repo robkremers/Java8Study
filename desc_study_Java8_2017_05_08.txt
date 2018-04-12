@@ -471,5 +471,50 @@ To perform a computation, stream operations are composed into a stream pipeline.
 
 Chapter 5: Working with streams.
 
+Operation	Type			Return type		Type / Functional
+											interface used
 
+filter		Intermediate	Stream<T>		Predicate<T>
+distinct	Intermediate	Stream<T>
+skip		Intermediate	Stream<T>		long
+limit		Intermediate	Stream<T>		long
+map			Intermediate	Stream<R>		Function<T,R>
+flatMap		Intermediate	Stream<R>		Function<T, Stream<R>>
+sorted		Intermediate	Stream<T>		Comparator<T>
+
+anyMatch	Terminate		boolean			Predicate<T>
+noneMatch	Terminate		boolean			Predicate<T>
+allMatch	Terminate		boolean			Predicate<T>
+findAny		Terminate		Optional<T>
+findFirst	Terminate		Optional<T>
+forEach		Terminate		void			Consumer<T>
+collect		Terminate		R				Collector<T, A, R>
+reduce		Terminate		Optional<T>		BinaryOperator<T>
+count		Terminate		long
 	
+	
+---------------------------------------------------------------------------------------------------
+2018-04-09:
+
+Chapter 6: Collecting data with streams.
+
+https://www.logicbig.com/how-to/code-snippets/jcode-java-8-streams-collectors-reducing.html
+
+java.util.stream.Collectors:
+- Three main functionalities are offered:
+	- Reducing and summarizing stream elements to a single value.
+	- Grouping elements.
+	- Partitioning elements.
+
+- Collect vs. Reduce
+	- The reduce method:
+		- is intended to combine two values and produce a new one.
+		- it's an immutable reduction.
+		- if reduce is misused to accumulate a result it can't work in parallel because this could corrupt the collection that it being processed.
+	- The collection method:
+		- designed to mutate a container to accumulate the result it's supposed to produce.
+
+		
+https://www.mkyong.com/java8/java-8-foreach-examples/
+- Examples of how to print Maps in java 8 style.
+

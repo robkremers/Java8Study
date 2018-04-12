@@ -22,7 +22,7 @@ public class Finding {
 
 	public static void checkAnyVegetarianDish() {
 		logger.log(Level.INFO, "************ Checking whether any vegetarian dish is present ************");
-		
+	
 		if (Dish.menu.stream()
 		         .anyMatch( Dish::isVegetarian)
 		         ) {

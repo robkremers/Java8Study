@@ -17,7 +17,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static java.util.Comparator.comparing;
-import static java.lang.System.out;
 
 import com.java8study.chapter03.comparators.ComparatorByInverseWeight;
 

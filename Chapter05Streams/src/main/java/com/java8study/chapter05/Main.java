@@ -23,7 +23,7 @@ public class Main {
 		Filtering.getVegetarianDishesJava7();
 		
 		Filtering.getVegetarianDishesJava8();
-		
+	
 		Filtering.getUniqueElements();
 		
 		Filtering.getTruncatedStream();
