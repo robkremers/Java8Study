@@ -40,7 +40,7 @@ public class Dish implements Serializable {
         return type;
     }
 
-    public enum Type { MEAT, FISH, OTHER }
+    public enum Type { MEAT, FISH, OTHER, VEGAN }
 
 //    @Override
 //    public String toString() {

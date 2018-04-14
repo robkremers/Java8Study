@@ -1,13 +1,17 @@
 package com.java8study.chapter06;
 
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.mapping;
+import static java.util.stream.Collectors.toList;
+import static java.util.Comparator.*;
+
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
-
-import static java.util.stream.Collectors.*;
 
 import com.java8study.chapter06.entities.Dish;
 import com.java8study.chapter06.enums.CaloricLevel;
@@ -22,6 +26,10 @@ public class Grouping {
 		groupDishesByType();
 		groupDishNamesByType();
 		printDishesByCaloricLevel();
+		printDishesByTypeCaloricLevel();
+		printingDishesInGroups();
+		printMaxCaloriesDishPerType();
+		printTotalCaloriesPerType();
 
 	}
 
@@ -58,6 +66,8 @@ public class Grouping {
 		Returns a Collector implementing a cascaded "group by" operation on input elements of type T, 
 		grouping elements according to a classification function, 
 		and then performing a reduction operation on the values associated with a given key using the specified downstream Collector.
+		
+		As Collector is used: java.util.stream.Collectors.mapping():
 		
 		static <T,U,A,R> Collector<T,?,R>	mapping( Function<? super T,? extends U> mapper
 		                                           , Collector<? super U,A,R> downstream
@@ -106,5 +116,99 @@ public class Grouping {
 			
 		});
 	}
+	
+	/**
+	 * Functionality:
+	 * - The dishes will firstly be grouped by Dish::getType.
+	 * - Secondly a mapping will be used consisting of a second grouping, now per CaloricLevel (custom set up).
+	 * 
+	 */
+	private static void printDishesByTypeCaloricLevel() {
+		logger.log(Level.INFO, "************ Grouping dishes per Type and per Caloric Level ************\n");
+		
+		Map<Dish.Type, Map<CaloricLevel, List<Dish>>> dishesByTypeCaloricLevel = 
+				Dish.menu.stream()
+				         .collect( 
+				        		 Collectors.groupingBy( Dish::getType,
+				        				 // A mapping collector:
+				        				 Collectors.groupingBy(
+				        						 (Dish dish) -> {
+                                     		  		if (dish.getCalories() < 400)
+                                     		  			return CaloricLevel.DIET;
+                                     		  		else if (dish.getCalories() <= 700)
+                                     		  			return CaloricLevel.NORMAL;
+                                     		  			else
+                                     		  				return CaloricLevel.FAT;
+                                     		  	}
+				        						 )
+				        		 ));
+		
+		dishesByTypeCaloricLevel.forEach( (type, mapDishesByCaloricLevel) -> {
+			System.out.println("Dish type: " + type);
+			mapDishesByCaloricLevel.forEach( (caloricLevel, dishes) -> {
+				System.out.println("\tCaloric Level: " + caloricLevel);
+				dishes.forEach( (Dish dish) -> System.out.println("\t\t" + dish));
+			});
+		});
+	}
+	
+	/**
+	 * static <T,K,A,D> Collector<T,?,Map<K,D>>	groupingBy( Function<? super T,? extends K> classifier
+	 *                                                    , Collector<? super T,A,D> downstream
+	 *                                                    )
 
+	 Returns a Collector implementing a cascaded "group by" operation on input elements of type T, 
+	 grouping elements according to a classification function, and then performing a reduction operation 
+	 on the values associated with a given key using the specified downstream Collector.
+
+	 */
+	private static void printingDishesInGroups() {
+		logger.log(Level.INFO, "************ Grouping and counting the number of dishes per type ************\n");
+		
+		Map<Dish.Type, Long> typesCount = Dish.menu.stream()
+				                                   .collect( Collectors.groupingBy( Dish::getType
+				                                		    					  , Collectors.counting() 
+				                                		    					  )
+				                                		   );
+		
+		typesCount.forEach( (type, nrOfDishes) -> {
+			System.out.println("Dish type: " + type + ", nr of dishes: " + nrOfDishes );
+		}); 
+		
+	}
+	
+	private static void printMaxCaloriesDishPerType() {
+		logger.log(Level.INFO, "************ Group the maximum number of calories per dish type ************\n");
+		
+		Map<Dish.Type, Optional<Dish> > maxCaloriesPerType = Dish.menu.stream()
+				                                                 .collect( groupingBy( Dish::getType
+				                                                		             , Collectors.maxBy( Comparator.comparingInt( Dish::getCalories))
+				                                                		             )
+				                                                		 );
+		
+		maxCaloriesPerType.forEach( (type, optionalDish) -> {
+			System.out.println("Dish type: " + type);
+			if (optionalDish.isPresent()) {
+				System.out.println("\tDish: " + optionalDish.get() );
+			} else {
+				System.out.println("No dishes found for this Dish type.");
+			}
+		});
+		
+	}
+
+	private static void printTotalCaloriesPerType() {
+		logger.log(Level.INFO, "************ Group the total number of calories per dish type ************\n");
+		
+		Map<Dish.Type, Integer> totalCaloriesPerType = Dish.menu.stream() 
+				                                                .collect( Collectors.groupingBy( Dish::getType
+				                                                		            , Collectors.summingInt( Dish::getCalories)
+				                                                		            )
+				                                                		 
+				                                                		);
+		totalCaloriesPerType.forEach( (type, totalCalories) -> {
+			System.out.println("Dish type: " + type);
+			System.out.println("\tTotal number of calories: " + totalCalories);
+		});
+	}
 }
