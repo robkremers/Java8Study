@@ -1,11 +1,14 @@
 package com.java8study.chapter07;
 
+import java.util.Spliterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import com.java8study.chapter07.functionality.WordCounter;
+import com.java8study.chapter07.functionality.WordCounterSpliterator;
 
 public class WordCount {
 	
@@ -28,6 +31,8 @@ public class WordCount {
 		Stream<Character> characterStreamParallel = IntStream.range(0, SENTENCE.length()).mapToObj(SENTENCE::charAt).parallel();
 		System.out.println("Number of words found in parallel: " + countWordsFunctionally( characterStreamParallel));
 
+		System.out.println("Number of words found in parallel using a spliterator: " + countWordsSpliterator(SENTENCE));
+
 	}
 	
 	private static int countWordsIteratively(String string) {
@@ -49,13 +54,8 @@ public class WordCount {
 		return counter;
 	}
 	
-//	private static int countWords(String string) {
-//		
-//		
-//	}
-	
 	private static int countWordsFunctionally(Stream<Character> characterStream) {
-		logger.log(Level.INFO, "************ Counting the words of Dante functionally but still sequentially ************\n");
+		logger.log(Level.INFO, "************ Counting the words of Dante functionally ************\n");
 		
 		WordCounter wordCounter = characterStream.reduce( new WordCounter(0, true)
 				                                        , WordCounter::accumulate
@@ -63,6 +63,15 @@ public class WordCount {
 				                                        );
 		return wordCounter.getCounter();
 		
+	}
+	
+	private static int countWordsSpliterator(String string) {
+		logger.log(Level.INFO, "************ Counting the words of Dante using the WordCounterSpliterator ************\n");
+		Spliterator<Character> spliterator = new WordCounterSpliterator(string);
+		
+		Stream<Character> characterStream = StreamSupport.stream(spliterator, true);
+		
+		return countWordsFunctionally( characterStream);
 	}
 	
 

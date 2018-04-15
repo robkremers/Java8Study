@@ -33,8 +33,7 @@ public class ForkJoinSumCalculator extends RecursiveTask<Long> implements Serial
 	private final long end;
 
 	
-
-	public ForkJoinSumCalculator(long[] numbers, long start, long end) {
+	private ForkJoinSumCalculator(long[] numbers, long start, long end) {
 		super();
 		this.numbers = numbers;
 		this.start = start;
@@ -42,7 +41,12 @@ public class ForkJoinSumCalculator extends RecursiveTask<Long> implements Serial
 	}
 
 
-
+	/**
+	 * The constructor that will be called to execute the for/join operation on a long[] array.
+	 * Internally this public constructor calls the private constructor, filling in the necessary paramters.
+	 * 
+	 * @param numbers
+	 */
 	public ForkJoinSumCalculator(long[] numbers) {
 		this(numbers, 0, numbers.length);
 	}
@@ -65,11 +69,22 @@ public class ForkJoinSumCalculator extends RecursiveTask<Long> implements Serial
 
 	}
 	
+	/**
+	 * Note:
+	 * Indeed the Java 7 style for loop can be replaced by the LongStream.range method.
+	 * However: the processing time will now vary from slighty slower (47 msec vs. 44 / 45 msec) to very much
+	 * slower: 115 msec.
+	 * So the Java 7 style loop is the best and will be used.
+	 * 
+	 * @return
+	 */
 	private long computeSequentially() {
 		long sum = 0;
 		for ( int i = ( int)start; i < end; i++ ) {
 			sum += numbers[ i ];
 		}
+		
+//		sum = LongStream.range(start, end).reduce( Long::sum).getAsLong();
 		return sum;
 	}
 

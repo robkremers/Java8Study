@@ -518,3 +518,12 @@ java.util.stream.Collectors:
 https://www.mkyong.com/java8/java-8-foreach-examples/
 - Examples of how to print Maps in java 8 style.
 
+www.thoughts-on-java.org
+
+---------------------------------------------------------------------------------------------------
+2018-04-15:
+
+Chapter 7 Parallel Data Processing and Performance.
+
+https://www.logicbig.com/tutorials/core-java-tutorial/java-collections/iterator-spliterator.html
+

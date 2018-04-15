@@ -18,6 +18,9 @@ public class ParallelStreams {
 	public static void main(String[] args) {
 		logger.log(Level.INFO, "************ Parallel Streaming actions ************\n");
 
+		/**
+		 * The processing is now carried out via ParallelStreamsHarness in order to show the amount of processing time.
+		 */
 		long limitation = 10_000_000;
 		iterativeSum(limitation);
 		sequentialSum(limitation);
@@ -31,7 +34,7 @@ public class ParallelStreams {
 	
 	/**
 	 * Note:
-	 * The Java 7 style is low level. Futhermore no Boxing is required.
+	 * The Java 7 style is low level. Furthermore no Boxing is required.
 	 * Therefore the performance can be relatively good.
 	 * 
 	 * @param limitation
@@ -77,10 +80,10 @@ public class ParallelStreams {
 		logger.log(Level.INFO, "************ Calculation of a Sequential Sum ************\n");
 		
 		long summation = Stream.iterate( 1L
-									   , ( i) -> ++i)
+									   , ( Long i) -> ++i)
 							   .limit( limitation )
 							   .reduce( 0L
-									  , Long::sum);
+									  , Long::sum );
 		
 //		System.out.println("The sequential sum with limitation " + limitation + " is " + summation);
 		

@@ -10,7 +10,10 @@ import java.util.logging.Logger;
  * Functionality:
  * An instance of the class and it's methods will be used as input for java.util.stream.Stream.reduce:
  * 
- * <U> U	reduce(U identity, BiFunction<U,? super T,U> accumulator, BinaryOperator<U> combiner)
+ * <U> U	reduce( U identity
+ *                , BiFunction<U,? super T,U> accumulator
+ *                , BinaryOperator<U> combiner
+ *                )
  * 		Performs a reduction on the elements of this stream, using the provided identity, accumulation and combining functions.
  * 
  * u = WordCounter.
@@ -40,8 +43,14 @@ public class WordCounter {
 	 * Functionality:
 	 * 	if the current character is a whitespace:
 	 * 		- if lastSpace is true the current WordCounter instance will be returned (nothing changes).
-	 * 		- if lastSpace is false ( the first whitespac after a word has ended is being processed) 
+	 * 			The functionality is passing through multiple whitespaces.
+	 * 		- if lastSpace is false ( the first whitespace after a word has ended is being processed) 
 	 * 		  a new WordCounter instance with lastSpace is true will be returned. 
+	 *  if the current character is not a whitespace (so part of a word):
+	 * 		- if lastSpace is true (the character is the first on of a new word) 
+	 * 		  a new WordCounter with lastSpace false will be returned
+	 *		- if lastSpace is false the current WordCounter will be returned.
+	 *			The functionality is passing through a word.
 	 * 
 	 * Note:
 	 * 	The method acts as a BiFunction<WordCounter, Character, WordCounter>.
