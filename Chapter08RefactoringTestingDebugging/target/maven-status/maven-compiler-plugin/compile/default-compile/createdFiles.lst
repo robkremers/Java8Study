@@ -3,6 +3,7 @@ com\java8study\chapter08\ObserverMain$Guardian.class
 com\java8study\chapter08\functionality\ProductFactory.class
 com\java8study\chapter08\entities\Stock.class
 com\java8study\chapter08\FactoryMain.class
+com\java8study\chapter08\interfaces\ProcessPoint.class
 com\java8study\chapter08\entities\Bond.class
 com\java8study\chapter08\entities\Loan.class
 com\java8study\chapter08\functionality\ProcessingObject.class
@@ -19,3 +20,4 @@ com\java8study\chapter08\ChainOfResponsibilityMain$SpellCheckerProcessing.class
 com\java8study\chapter08\ObserverMain.class
 com\java8study\chapter08\interfaces\Product.class
 com\java8study\chapter08\ObserverMain$NYTimes.class
+PeekMain.class

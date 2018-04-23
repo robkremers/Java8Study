@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.java8study.chapter08.TestLambda" time="0.062" tests="3" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.java8study.chapter08.TestLambda" time="0.056" tests="3" errors="0" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="windows"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -18,7 +18,7 @@
     <property name="user.country" value="US"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="C:\Java\jdk1.8.0_131\jre\bin"/>
-    <property name="sun.java.command" value="C:\Users\LTAdmin\AppData\Local\Temp\surefire9185678591688844610\surefirebooter1690982163534240581.jar C:\Users\LTAdmin\AppData\Local\Temp\surefire9185678591688844610 2018-04-19T22-38-06_147-jvmRun1 surefire2392633719125570499tmp surefire_08280222448526215526tmp"/>
+    <property name="sun.java.command" value="C:\Users\LTAdmin\AppData\Local\Temp\surefire7273505611129049726\surefirebooter1548541623314182091.jar C:\Users\LTAdmin\AppData\Local\Temp\surefire7273505611129049726 2018-04-21T15-38-50_847-jvmRun1 surefire68413811411570615tmp surefire_05206016587151490814tmp"/>
     <property name="surefire.test.class.path" value="E:\JavaDevelopment\Java8InActionWorkspace\Chapter08RefactoringTestingDebugging\target\test-classes;E:\JavaDevelopment\Java8InActionWorkspace\Chapter08RefactoringTestingDebugging\target\classes;C:\Users\LTAdmin\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\LTAdmin\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\LTAdmin"/>
@@ -31,7 +31,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="C:\Users\LTAdmin\AppData\Local\Temp\surefire9185678591688844610\surefirebooter1690982163534240581.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\LTAdmin\AppData\Local\Temp\surefire7273505611129049726\surefirebooter1548541623314182091.jar"/>
     <property name="sun.boot.class.path" value="C:\Java\jdk1.8.0_131\jre\lib\resources.jar;C:\Java\jdk1.8.0_131\jre\lib\rt.jar;C:\Java\jdk1.8.0_131\jre\lib\sunrsasign.jar;C:\Java\jdk1.8.0_131\jre\lib\jsse.jar;C:\Java\jdk1.8.0_131\jre\lib\jce.jar;C:\Java\jdk1.8.0_131\jre\lib\charsets.jar;C:\Java\jdk1.8.0_131\jre\lib\jfr.jar;C:\Java\jdk1.8.0_131\jre\classes"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
@@ -60,7 +60,7 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="52.0"/>
   </properties>
-  <testcase name="testComparingTwoPoints" classname="com.java8study.chapter08.TestLambda" time="0.046"/>
-  <testcase name="testMoveAllPointsRightBy" classname="com.java8study.chapter08.TestLambda" time="0.011"/>
+  <testcase name="testComparingTwoPoints" classname="com.java8study.chapter08.TestLambda" time="0.042"/>
+  <testcase name="testMoveAllPointsRightBy" classname="com.java8study.chapter08.TestLambda" time="0.009"/>
   <testcase name="testMoveRightBy" classname="com.java8study.chapter08.TestLambda" time="0"/>
 </testsuite>

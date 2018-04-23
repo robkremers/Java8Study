@@ -3,6 +3,7 @@ E:\JavaDevelopment\Java8InActionWorkspace\Chapter08RefactoringTestingDebugging\s
 E:\JavaDevelopment\Java8InActionWorkspace\Chapter08RefactoringTestingDebugging\src\main\java\com\java8study\chapter08\entities\Point.java
 E:\JavaDevelopment\Java8InActionWorkspace\Chapter08RefactoringTestingDebugging\src\main\java\com\java8study\chapter08\functionality\ProductFactory.java
 E:\JavaDevelopment\Java8InActionWorkspace\Chapter08RefactoringTestingDebugging\src\main\java\com\java8study\chapter08\DebuggingLambdaMain.java
+E:\JavaDevelopment\Java8InActionWorkspace\Chapter08RefactoringTestingDebugging\src\main\java\com\java8study\chapter08\interfaces\ProcessPoint.java
 E:\JavaDevelopment\Java8InActionWorkspace\Chapter08RefactoringTestingDebugging\src\main\java\com\java8study\chapter08\ObserverMain.java
 E:\JavaDevelopment\Java8InActionWorkspace\Chapter08RefactoringTestingDebugging\src\main\java\com\java8study\chapter08\ChainOfResponsibilityMain.java
 E:\JavaDevelopment\Java8InActionWorkspace\Chapter08RefactoringTestingDebugging\src\main\java\com\java8study\chapter08\entities\Bond.java
@@ -11,3 +12,4 @@ E:\JavaDevelopment\Java8InActionWorkspace\Chapter08RefactoringTestingDebugging\s
 E:\JavaDevelopment\Java8InActionWorkspace\Chapter08RefactoringTestingDebugging\src\main\java\com\java8study\chapter08\FactoryMain.java
 E:\JavaDevelopment\Java8InActionWorkspace\Chapter08RefactoringTestingDebugging\src\main\java\com\java8study\chapter08\entities\Stock.java
 E:\JavaDevelopment\Java8InActionWorkspace\Chapter08RefactoringTestingDebugging\src\main\java\com\java8study\chapter08\interfaces\Observer.java
+E:\JavaDevelopment\Java8InActionWorkspace\Chapter08RefactoringTestingDebugging\src\main\java\PeekMain.java
